@@ -1,2 +1,15 @@
 /target/
 /.idea/
+
+*.iml
+out
+gen
+.classpath
+*.eml
+target
+*.log
+.log.
+generatorConfig.xml
+.DS_Store
+*.cache
+.lock
