@@ -15,4 +15,6 @@ public interface CompanyDao {
     Company findById(String id);
 
     List<Company> findAll();
+
+    List<Company> find();
 }
