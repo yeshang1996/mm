@@ -10,7 +10,7 @@ public class CompanyServiceTest {
     public void testSave(){
         CompanyServiceImpl companyService = new CompanyServiceImpl();
         Company company = new Company();
-        company.setName("测试数据");
+        company.setName("测试数据1");
         companyService.save(company);
     }
 
