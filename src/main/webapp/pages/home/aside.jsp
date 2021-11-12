@@ -99,7 +99,7 @@
                 </a>
             </li>
             <li id="company-manager">
-                <a href="${ctx}/store/company?operation=list" onclick="setSidebarActive(this)" target="iframe">
+                <a href="${ctx}/pages/store/company/list.jsp" onclick="setSidebarActive(this)" target="iframe">
                     <i class="fa fa-circle-o"></i>企业管理
                 </a>
             </li>
