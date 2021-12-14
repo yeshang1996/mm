@@ -112,47 +112,7 @@
                 </table>
             </div>
         </div>
-        <!-- /.box-body -->
 
-         <!-- .box-footer-->
-        <%--  <form action="${ctx}/company/list.do" method="post">
-         <div class="box-footer">
-             <div class="pull-left">
-                 <div class="form-group form-inline">
-                     总共${page.totalPage} 页，共${page.total}条数据。 每页
-                     <select class="form-control">
-                         <option ${page.size==5?'selected':''}>5</option>
-                         <option ${page.size==10?'selected':''}>10</option>
-                         <option ${page.size==15?'selected':''}>25</option>
-                         <option ${page.size==20?'selected':''}>20</option>
-                     </select> 条
-                </div>
-            </div>
-
-            <div class="box-tools pull-right">
-                <ul class="pagination">
-                    <li>
-                        <a href="javascript:toPage('1')" aria-label="Previous">首页</a>
-                    </li>
-                    <li><a href="javascript:toPage('${page.pre}')">上一页</a></li>
-                    <c:forEach begin="${page.beg}" end="${page.end}" var="index">
-                        <li><a href="javascript:toPage('${index}')">${index}</a></li>
-                    </c:forEach>
-                    <li><a href="javascript:toPage('${page.next}')">下一页</a></li>
-                    <li>
-                        <a href="javascript:toPage('${page.totalPage}')" aria-label="Next">尾页</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <script type="text/javascript">
-            function toPage(pageNum){
-                document.getElementById("page").value = pageNum;
-                document.forms[0].submit();
-            }
-        </script>
-        <input type="hidden" name="page" id="page" value="">
-        </form>--%>
 
          <div class="box-footer">
              <jsp:include page="../../common/page.jsp">
