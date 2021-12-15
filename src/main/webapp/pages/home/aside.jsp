@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+     <section class="sidebar">
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
@@ -110,7 +110,7 @@
                 </a>
             </li>
             <li id="question-examine-manager">
-                <a href="${ctx}/store/examineLog?operation=list" onclick="setSidebarActive(this)"
+                <a href="${ctx}/store/examineLog?operation=list" onclickq="setSidebarActive(this)"
                    target="iframe">
                     <i class="fa fa-circle-o"></i>题目审核日志管理
                 </a>
@@ -125,7 +125,7 @@
              </span>
         </a>
         <ul class="treeview-menu">
-            <li id="member-manager">
+            <li id="member-manager">q
                 <a href="${ctx}/front/member?operation=list" onclick="setSidebarActive(this)"
                    target="iframe">
                     <i class="fa fa-circle-o"></i>会员账号管理
