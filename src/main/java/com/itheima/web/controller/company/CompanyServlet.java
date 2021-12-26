@@ -35,6 +35,10 @@ public class CompanyServlet extends HttpServlet {
             request.setAttribute("page",all);
             //跳转页面
             request.getRequestDispatcher("/WEB-INF/pages/store/company/list.jsp").forward(request,response);
+        }else if ("toAdd".equals(operation)){
+
+        }else if ("save".equals(operation)){
+
         }
     }
 
