@@ -1,8 +1,10 @@
 package com.itheima.web.controller.company;
 
 import com.github.pagehelper.PageInfo;
+import com.itheima.domain.store.Company;
 import com.itheima.service.store.CompanyService;
 import com.itheima.service.store.impl.CompanyServiceImpl;
+import com.itheima.utils.BeanUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.util.StringUtil;
 
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//uri:/store/company?operation=list
 @WebServlet("/store/company")
 public class CompanyServlet extends HttpServlet {
     @Override
@@ -23,7 +26,7 @@ public class CompanyServlet extends HttpServlet {
         }else if ("toAdd".equals(operation)){
             this.toAdd(request,response);
         }else if ("save".equals(operation)){
-
+            this.save(request,response);
         }else if ("list".equals(operation)){
 
         }else if ("list".equals(operation)){
@@ -55,6 +58,14 @@ public class CompanyServlet extends HttpServlet {
     }
 
     private void save(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        //获取数据，封装成一个对象
+        Company company = BeanUtil.fillBean(request,Company.class,"yyyy-MM-dd");
+        //调用业务层save
+        CompanyService companyService = new CompanyServiceImpl();
+        companyService.save(company);
+        //跳转回页面list
+        //list(request,response);
+        response.sendRedirect(request.getContextPath()+"/store/company?operation=list");
 
     }
 
