@@ -27,12 +27,14 @@ public class CompanyServlet extends HttpServlet {
             this.toAdd(request,response);
         }else if ("save".equals(operation)){
             this.save(request,response);
-        }else if ("list".equals(operation)){
-
-        }else if ("list".equals(operation)){
-
+        }else if ("toEdit".equals(operation)){
+            this.toEdit(request,response);
+        }else if ("edit".equals(operation)){
+            this.edit(request,response);
         }
     }
+
+
 
     private void list(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         //进入列表页
@@ -66,9 +68,29 @@ public class CompanyServlet extends HttpServlet {
         //跳转回页面list
         //list(request,response);
         response.sendRedirect(request.getContextPath()+"/store/company?operation=list");
-
     }
 
+    private void toEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //查询要修改的数据findById
+        String id = request.getParameter("id");
+        CompanyService companyService = new CompanyServiceImpl();
+        Company company = companyService.findById(id);
+        //将数据加载到指定区域，供页面获取
+        request.setAttribute("company",company);
+        //页面跳转
+        request.getRequestDispatcher("/WEB-INF/pages/store/company/update.jsp").forward(request,response);
+    }
+
+    private void edit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //获取数据，封装成一个对象
+        Company company = BeanUtil.fillBean(request,Company.class,"yyyy-MM-dd");
+        //调用业务层save
+        CompanyService companyService = new CompanyServiceImpl();
+        companyService.update(company);
+        //跳转回页面list
+        //list(request,response);
+        response.sendRedirect(request.getContextPath()+"/store/company?operation=list");
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
