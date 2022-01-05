@@ -31,6 +31,10 @@ public class CompanyServlet extends HttpServlet {
             this.toEdit(request,response);
         }else if ("edit".equals(operation)){
             this.edit(request,response);
+        }else if ("edit".equals(operation)){
+            this.edit(request,response);
+        }else if ("edit".equals(operation)){
+            this.edit(request,response);
         }
     }
 
@@ -75,7 +79,7 @@ public class CompanyServlet extends HttpServlet {
         String id = request.getParameter("id");
         CompanyService companyService = new CompanyServiceImpl();
         Company company = companyService.findById(id);
-        //将数据加载到指定区域，供页面获取
+        //将数据加载到指定区域，供页面获取;
         request.setAttribute("company",company);
         //页面跳转
         request.getRequestDispatcher("/WEB-INF/pages/store/company/update.jsp").forward(request,response);

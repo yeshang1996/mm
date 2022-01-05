@@ -1,7 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ include file="../../base.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -22,12 +20,13 @@
     <!-- 内容头部 -->
     <section class="content-header">
         <h1>
-            系统管理
-            <small>用户管理</small>
+            企业管理
+            <small>编辑企业信息</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="${ctx}"><i class="fa fa-dashboard"></i> 首页</a></li>
-            <li><a href="${ctx}/system/user/list.do">用户列表</a></li>
+            <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li><a href="all-order-manage-list.html">企业管理</a></li>
+            <li class="active">编辑企业信息</li>
         </ol>
     </section>
     <!-- 内容头部 /-->
@@ -37,77 +36,61 @@
 
         <!--订单信息-->
         <div class="panel panel-default">
-            <div class="panel-heading">用户信息</div>
-            <form id="editForm" action="${ctx}/system/user?operation=edit" method="post">
+            <div class="panel-heading">企业信息</div>
+            <form id="editForm" action="${ctx}/store/company?operation=edit" method="post">
+                <input type="hidden" name="id" value="${company.id}">
                 <div class="row data-type" style="margin: 0px">
-                    <input type="hidden" name="id" value="${user.id}">
-
-                    <div class="col-md-2 title">邮箱</div>
+                    <div class="col-md-2 title">企业名称</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="邮箱" name="email" value="${user.email}">
+                        <input type="text" class="form-control" placeholder="企业名称" name="name" value="${company.name}">
                     </div>
 
-                    <div class="col-md-2 title">密码</div>
+                    <div class="col-md-2 title">营业执照</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="密码" name="password" value="${user.password}">
+                        <input type="text" class="form-control" placeholder="营业执照" name="licenseId" value="${company.licenseId}">
                     </div>
 
-                    <div class="col-md-2 title">姓名</div>
+                    <div class="col-md-2 title">所在城市</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="用户名称" name="userName" value="${user.userName}">
+                        <input type="text" class="form-control" placeholder="所在地" name="city" value="${company.city}">
                     </div>
 
-                    <div class="col-md-2 title">所在部门</div>
+                    <div class="col-md-2 title">企业地址</div>
                     <div class="col-md-4 data">
-                        <select class="form-control" onchange="document.getElementById('deptName').value=this.options[this.selectedIndex].text" name="deptId">
-                            <option value="">请选择</option>
-                            <c:forEach items="${deptList}" var="item">
-                                <option ${user.deptId == item.id ?'selected':''} value="${item.id}">${item.deptName}</option>
-                            </c:forEach>
-                        </select>
+                        <input type="text" class="form-control" placeholder="企业地址" name="address" value="${company.address}">
                     </div>
 
-                    <div class="col-md-2 title">性别</div>
+                    <div class="col-md-2 title">法人代表</div>
                     <div class="col-md-4 data">
-                        <div class="form-group form-inline">
-                            <div class="radio"><label><input type="radio" ${user.gender==0?'checked':''} name="gender" value="0">男</label></div>
-                            <div class="radio"><label><input type="radio" ${user.gender==1?'checked':''} name="gender" value="1">女</label></div>
-                        </div>
+                        <input type="text" class="form-control" placeholder="法人代表" name="representative" value="${company.representative}">
                     </div>
 
-                    <div class="col-md-2 title">出生日期</div>
+                    <div class="col-md-2 title">联系电话</div>
                     <div class="col-md-4 data">
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="text" placeholder="出生年月" class="form-control pull-right" name="birthday"
-                                   value="<fmt:formatDate value="${user.birthday}" pattern="yyyy-MM-dd"/>" id="datepicker1">
-                        </div>
+                        <input type="text" class="form-control" placeholder="联系电话" name="phone" value="${company.phone}">
                     </div>
 
+                    <div class="col-md-2 title">公司规模</div>
+                    <div class="col-md-4 data">
+                        <input type="text" class="form-control" placeholder="公司规模" name="companySize" value="${company.companySize}">
+                    </div>
+
+                    <div class="col-md-2 title">所属行业</div>
+                    <div class="col-md-4 data">
+                        <input type="text" class="form-control" placeholder="所属行业" name="industry" value="${company.industry}">
+                    </div>
                     <div class="col-md-2 title">状态</div>
                     <div class="col-md-4 data">
-                        <div class="form-group form-inline">
-                            <div class="radio"><label><input type="radio" ${user.state==0?'checked':''} name="state" value="0">停用</label></div>
-                            <div class="radio"><label><input type="radio" ${user.state==1?'checked':''} name="state" value="1">启用</label></div>
-                        </div>
+                        <select class="form-control select2" name="state" style="width: 100%;">
+                            <option value="0" ${company.state==0 ? 'selected':''}>未审核</option>
+                            <option value="1" ${company.state==1 ? 'selected':''}>已审核</option>
+                        </select>
+                        <input type="text" class="form-control" placeholder="状态" name="state" value="${company.state}">
                     </div>
 
-                    <div class="col-md-2 title">电话</div>
-                    <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="电话" name="telephone" value="${user.telephone}">
-                    </div>
-
-                    <div class="col-md-2 title">入职日期</div>
-                    <div class="col-md-4 data">
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="text" placeholder="入职时间"  name="joinDate" class="form-control pull-right"
-                                   value="<fmt:formatDate value="${user.joinDate}" pattern="yyyy-MM-dd"/>" id="2">
-                        </div>
+                    <div class="col-md-2 title rowHeight2x">备注</div>
+                    <div class="col-md-4 data rowHeight2x">
+                        <textarea class="form-control" rows="3" name="remarks">${company.remarks}</textarea>
                     </div>
                 </div>
             </form>
@@ -127,17 +110,5 @@
 </div>
 <!-- 内容区域 /-->
 </body>
-<script src="${ctx}/plugins/datepicker/bootstrap-datepicker.js"></script>
-<script src="${ctx}/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
-<link rel="stylesheet" href="${ctx}/css/style.css">
-<script>
-    $('#datepicker').datepicker({
-        autoclose: true,
-        format: 'yyyy-mm-dd'
-    });
-    $('#datepicker1').datepicker({
-        autoclose: true,
-        format: 'yyyy-mm-dd'
-    });
-</script>
+
 </html>
